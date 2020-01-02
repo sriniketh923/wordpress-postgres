@@ -1,0 +1,28 @@
+version: '3.3'
+
+networks:
+  wordpress-network:
+    driver: bridge
+
+services: 
+  db:
+    build:
+      context: ./pg_dockerfile/
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD: example
+    networks:
+      - wordpress-network
+
+  apache:
+    build:
+      context: ./wp_dockerfile/
+      dockerfile: Dockerfile
+    ports:
+      - '80:80'
+      - '443:443'
+    networks:
+      - wordpress-network
