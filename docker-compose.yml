@@ -6,9 +6,7 @@ networks:
 
 services: 
   db:
-    build:
-      context: ./pg_dockerfile/
-      dockerfile: Dockerfile
+    image: srinikethvarma/postgres:latest
     restart: always
     ports:
       - '5432:5432'
@@ -18,9 +16,7 @@ services:
       - wordpress-network
 
   apache:
-    build:
-      context: ./wp_dockerfile/
-      dockerfile: Dockerfile
+    image: srinikethvarma/wordpress:latest
     ports:
       - '80:80'
       - '443:443'
